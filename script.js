@@ -91,6 +91,9 @@ nextButton.addEventListener("click", showRandomCountry);
 userInput.addEventListener("keydown", e => {
   if (e.key === "Enter") checkGuess();
 });
+<script src="https://unpkg.com/three@0.150.1/build/three.min.js"></script>
+<script src="https://unpkg.com/globe.gl@2.25.3/dist/globe.gl.min.js"></script>
+<script src="script.js"></script>
 
 // Initialize on load
 window.onload = loadCountries;
