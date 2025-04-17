@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GlobeTrotter Game</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🌍 Guess the Country!</h1>
+    <img id="country-image" src="" alt="Country silhouette" />
+    
+    <input type="text" id="user-input" list="country-suggestions" placeholder="Type country name..." />
+    <datalist id="country-suggestions"></datalist>
+
+    <div class="buttons">
+      <button id="guess-button">Guess</button>
+      <button id="next-button">Next</button>
+    </div>
+
+    <p id="feedback"></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
