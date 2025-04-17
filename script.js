@@ -1,3 +1,13 @@
+// Create a globe and attach to #globeViz
+const world = Globe()
+  (document.getElementById('globeViz'))
+  .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
+  .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png');
+
+// Optional: spin the globe slowly
+world.controls().autoRotate = true;
+world.controls().autoRotateSpeed = 0.5;
+
 <script src="https://unpkg.com/three@0.150.1/build/three.min.js"></script>
 <script src="https://unpkg.com/globe.gl@2.25.3/dist/globe.gl.min.js"></script>
 <script src="script.js"></script>
