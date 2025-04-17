@@ -47,6 +47,27 @@ function checkGuess() {
     feedback.style.color = "red";
   }
 }
+async function checkGuess() {
+  const input = userInput.value.trim().toLowerCase();
+  const correct = currentCountry.name.toLowerCase();
+  feedback.textContent = input === correct ? "🎉 Correct!" : "❌ Try again!";
+  feedback.style.color = input === correct ? "green" : "red";
+
+  // If correct, fetch and display facts
+  if (input === correct) {
+    const facts = await loadCountryFacts(currentCountry.name);
+    if (facts) {
+      document.getElementById("country-facts").innerHTML = `
+        <p><img src="${facts.flag}" alt="Flag of ${currentCountry.name}"> 
+          <strong>Capital:</strong> ${facts.capital}</p>
+        <p><strong>Population:</strong> ${facts.population}</p>
+      `;
+    }
+  } else {
+    // Clear any previous facts
+    document.getElementById("country-facts").textContent = "";
+  }
+}
 
 document.getElementById("guess-button").addEventListener("click", checkGuess);
 document.getElementById("next-button").addEventListener("click", showRandomCountry);
@@ -55,3 +76,18 @@ document.getElementById("user-input").addEventListener("keydown", function (e) {
 });
 
 window.onload = loadCountries;
+async function loadCountryFacts(name) {
+  try {
+    const res = await fetch(`https://restcountries.com/v3.1/name/${encodeURIComponent(name)}?fullText=true`);
+    const [data] = await res.json();
+    return {
+      capital: data.capital?.[0] || "N/A",
+      population: data.population.toLocaleString(),
+      flag: data.flags.png
+    };
+  } catch (e) {
+    console.error("Facts fetch failed", e);
+    return null;
+  }
+}
+
