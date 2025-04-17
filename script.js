@@ -1,84 +1,57 @@
 let countries = [];
 let currentCountry = null;
 
+// DOM refs
+const countryImage = document.getElementById("country-image");
+const userInput    = document.getElementById("user-input");
+const feedback     = document.getElementById("feedback");
+const nextButton   = document.getElementById("next-button");
+const dataList     = document.getElementById("country-suggestions");
+const factsDiv     = document.getElementById("country-facts");
+
+// Load countries.json (fallback to hardcoded if it fails)
 async function loadCountries() {
   try {
-    const response = await fetch("countries.json");
-    countries = await response.json();
-    populateSuggestions();
-    showRandomCountry();
-  } catch (error) {
-    console.error("Error loading countries:", error);
+    const res = await fetch("countries.json");
+    countries = await res.json();
+  } catch (e) {
+    console.error("Failed to load countries.json, using fallback.", e);
+    countries = [
+      { name: "Morocco", image: "images/morocco.png" },
+      { name: "France",   image: "images/france.png"  }
+    ];
   }
+  populateSuggestions();
+  showRandomCountry();
 }
 
+// Populate autocomplete list
 function populateSuggestions() {
-  const datalist = document.getElementById("country-suggestions");
-  datalist.innerHTML = "";
-  countries.forEach((country) => {
-    const option = document.createElement("option");
-    option.value = country.name;
-    datalist.appendChild(option);
+  dataList.innerHTML = "";
+  countries.forEach(c => {
+    const opt = document.createElement("option");
+    opt.value = c.name;
+    dataList.appendChild(opt);
   });
 }
 
+// Show a random country
 function showRandomCountry() {
-  const randomIndex = Math.floor(Math.random() * countries.length);
-  currentCountry = countries[randomIndex];
-
-  const image = document.getElementById("country-image");
-  image.src = currentCountry.image;
-  image.alt = "Country silhouette";
-
-  document.getElementById("user-input").value = "";
-  document.getElementById("feedback").textContent = "";
+  const idx = Math.floor(Math.random() * countries.length);
+  currentCountry = countries[idx];
+  countryImage.src = currentCountry.image;
+  countryImage.alt = currentCountry.name;
+  feedback.textContent = "";
+  factsDiv.innerHTML = "";
+  userInput.value = "";
 }
 
-function checkGuess() {
-  const input = document.getElementById("user-input").value.trim().toLowerCase();
-  const correct = currentCountry.name.toLowerCase();
-  const feedback = document.getElementById("feedback");
-
-  if (input === correct) {
-    feedback.textContent = "🎉 Correct!";
-    feedback.style.color = "green";
-  } else {
-    feedback.textContent = "❌ Try again!";
-    feedback.style.color = "red";
-  }
-}
-async function checkGuess() {
-  const input = userInput.value.trim().toLowerCase();
-  const correct = currentCountry.name.toLowerCase();
-  feedback.textContent = input === correct ? "🎉 Correct!" : "❌ Try again!";
-  feedback.style.color = input === correct ? "green" : "red";
-
-  // If correct, fetch and display facts
-  if (input === correct) {
-    const facts = await loadCountryFacts(currentCountry.name);
-    if (facts) {
-      document.getElementById("country-facts").innerHTML = `
-        <p><img src="${facts.flag}" alt="Flag of ${currentCountry.name}"> 
-          <strong>Capital:</strong> ${facts.capital}</p>
-        <p><strong>Population:</strong> ${facts.population}</p>
-      `;
-    }
-  } else {
-    // Clear any previous facts
-    document.getElementById("country-facts").textContent = "";
-  }
-}
-
-document.getElementById("guess-button").addEventListener("click", checkGuess);
-document.getElementById("next-button").addEventListener("click", showRandomCountry);
-document.getElementById("user-input").addEventListener("keydown", function (e) {
-  if (e.key === "Enter") checkGuess();
-});
-
-window.onload = loadCountries;
+// Fetch and display country facts
 async function loadCountryFacts(name) {
   try {
-    const res = await fetch(`https://restcountries.com/v3.1/name/${encodeURIComponent(name)}?fullText=true`);
+    const res = await fetch(
+      `https://restcountries.com/v3.1/name/${encodeURIComponent(name)}?fullText=true`
+    );
     const [data] = await res.json();
     return {
       capital: data.capital?.[0] || "N/A",
@@ -86,8 +59,38 @@ async function loadCountryFacts(name) {
       flag: data.flags.png
     };
   } catch (e) {
-    console.error("Facts fetch failed", e);
+    console.error("Could not fetch facts for", name, e);
     return null;
   }
 }
 
+// Check the user's guess
+async function checkGuess() {
+  const guess   = userInput.value.trim().toLowerCase();
+  const actual  = currentCountry.name.toLowerCase();
+  feedback.textContent = guess === actual ? "🎉 Correct!" : "❌ Try again!";
+  feedback.style.color = guess === actual ? "green" : "red";
+
+  if (guess === actual) {
+    const facts = await loadCountryFacts(currentCountry.name);
+    if (facts) {
+      factsDiv.innerHTML = `
+        <p><img src="${facts.flag}" alt="Flag of ${currentCountry.name}"> 
+           <strong>Capital:</strong> ${facts.capital}</p>
+        <p><strong>Population:</strong> ${facts.population}</p>
+      `;
+    }
+  } else {
+    factsDiv.innerHTML = "";
+  }
+}
+
+// Event listeners
+document.getElementById("guess-button").addEventListener("click", checkGuess);
+nextButton.addEventListener("click", showRandomCountry);
+userInput.addEventListener("keydown", e => {
+  if (e.key === "Enter") checkGuess();
+});
+
+// Initialize on load
+window.onload = loadCountries;
