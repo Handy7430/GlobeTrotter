@@ -4,31 +4,35 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GlobeTrotter Game</title>
-  <head>
-  …
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
-
- <body>
-  <div class="container">
-    <h1>🌍 Guess the Country!</h1>
-    <img id="country-image" src="" alt="Country silhouette" />
-    
-    <input type="text" id="user-input" list="country-suggestions" placeholder="Type country name..." />
-    <datalist id="country-suggestions"></datalist>
-
-    <div class="buttons">
-      <button id="guess-button">Guess</button>
-      <button id="next-button">Next</button>
+<body>
+  <header>
+    <h1>🌍 GlobeTrotter</h1>
+    <p>Test your geography knowledge!</p>
+  </header>
+  <main>
+    <div class="container">
+      <h2>Guess the Country</h2>
+      <img id="country-image" src="" alt="Country silhouette" />
+      <input
+        type="text"
+        id="user-input"
+        list="country-suggestions"
+        placeholder="Type country name..."
+      />
+      <datalist id="country-suggestions"></datalist>
+      <div class="buttons">
+        <button id="guess-button">Guess</button>
+        <button id="next-button">Next</button>
+      </div>
+      <p id="feedback"></p>
+      <div id="country-facts"></div>
     </div>
-
-    <p id="feedback"></p>
-    <!-- inside your .container, below the feedback <p> -->
-<p id="feedback"></p>
-<div id="country-facts"></div>
-
-  </div>
-
+  </main>
+  <footer>
+    &copy; 2025 GlobeTrotter — Your Geography Quiz
+  </footer>
   <script src="script.js"></script>
 </body>
 </html>
