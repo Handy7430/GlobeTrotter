@@ -1,5 +1,3 @@
-
-
 let countries = [];
 let currentCountry = null;
 
@@ -18,8 +16,8 @@ async function loadCountries() {
   } catch (e) {
     console.error("Failed to load countries.json, using fallback.", e);
     countries = [
-      { name: "Morocco", image: "images/morocco.png" },
-      { name: "France",   image: "images/france.png"  }
+      { name: "Morocco" },
+      { name: "France" }
     ];
   }
   populateSuggestions();
@@ -91,15 +89,14 @@ userInput.addEventListener("keydown", e => {
   if (e.key === "Enter") checkGuess();
 });
 
+// Initialize globe and countries
+window.onload = async () => {
+  await loadCountries();
 
-// Initialize on load
-window.onload = loadCountries;
-// Create a globe and attach to #globeViz
-const world = Globe()
-  (document.getElementById('globeViz'))
-  .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
-  .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png');
+  const world = Globe()(document.getElementById('globeViz'))
+    .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
+    .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png');
 
-// Optional: spin the globe slowly
-world.controls().autoRotate = true;
-world.controls().autoRotateSpeed = 0.5;
+  world.controls().autoRotate = true;
+  world.controls().autoRotateSpeed = 0.5;
+};
