@@ -120,3 +120,9 @@ footer {
   font-size: 0.9rem;
   color: #555;
 }
+#globeViz {
+  margin: 20px auto;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  max-width: 800px;
+}
