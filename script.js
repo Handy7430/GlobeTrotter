@@ -1,12 +1,3 @@
-// Create a globe and attach to #globeViz
-const world = Globe()
-  (document.getElementById('globeViz'))
-  .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
-  .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png');
-
-// Optional: spin the globe slowly
-world.controls().autoRotate = true;
-world.controls().autoRotateSpeed = 0.5;
 
 
 let countries = [];
@@ -106,3 +97,12 @@ userInput.addEventListener("keydown", e => {
 
 // Initialize on load
 window.onload = loadCountries;
+// Create a globe and attach to #globeViz
+const world = Globe()
+  (document.getElementById('globeViz'))
+  .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
+  .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png');
+
+// Optional: spin the globe slowly
+world.controls().autoRotate = true;
+world.controls().autoRotateSpeed = 0.5;
