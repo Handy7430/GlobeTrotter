@@ -4,7 +4,6 @@ let countries = [];
 let currentCountry = null;
 
 // DOM refs
-const countryImage = document.getElementById("country-image");
 const userInput    = document.getElementById("user-input");
 const feedback     = document.getElementById("feedback");
 const nextButton   = document.getElementById("next-button");
@@ -41,8 +40,6 @@ function populateSuggestions() {
 function showRandomCountry() {
   const idx = Math.floor(Math.random() * countries.length);
   currentCountry = countries[idx];
-  countryImage.src = currentCountry.image;
-  countryImage.alt = currentCountry.name;
   feedback.textContent = "";
   factsDiv.innerHTML = "";
   userInput.value = "";
