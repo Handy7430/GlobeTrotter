@@ -1,38 +1,54 @@
-/* Reset and base */
+/* Reset & box sizing */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 html, body {
+  width: 100%;
   height: 100%;
 }
 
-/* Center the container vertically & horizontally */
+/* Body & background */
 body {
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+}
+
+/* Header */
+header {
+  padding: 1rem 2rem;
+  text-align: center;
+  background: rgba(255,255,255,0.6);
+}
+header h1 {
+  font-size: 2rem;
+  color: #333;
+}
+header p {
+  color: #555;
+  margin-top: 0.5rem;
+}
+
+/* Centering main content */
+main {
+  flex: 1;              /* take up remaining vertical space */
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Game card */
+/* Game container (“card”) */
 .container {
   background: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  text-align: center;
   width: 90%;
   max-width: 400px;
-  padding: 2rem 1.5rem;
-  border-radius: 16px;
-  box-shadow: 0 12px 24px rgba(0,0,0,0.1);
-  text-align: center;
-}
-
-/* Title */
-.container h1 {
-  margin-bottom: 1rem;
-  font-size: 1.8rem;
-  color: #333;
 }
 
 /* Country image */
@@ -45,7 +61,7 @@ body {
   margin-bottom: 1rem;
 }
 
-/* Input field */
+/* Input & datalist */
 #user-input {
   width: 100%;
   padding: 0.75rem;
@@ -55,38 +71,37 @@ body {
   margin-bottom: 1rem;
 }
 
-/* Button row */
+/* Buttons row */
 .buttons {
   display: flex;
   gap: 0.5rem;
   margin-bottom: 1rem;
 }
-
-/* Buttons */
 .buttons button {
   flex: 1;
   padding: 0.75rem;
   font-size: 1rem;
   border: none;
   border-radius: 8px;
-  background-color: #3b82f6;
+  background: #3b82f6;
   color: #fff;
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
 .buttons button:hover {
-  background-color: #2563eb;
+  background: #2563eb;
 }
 
 /* Feedback text */
 #feedback {
-  font-size: 1.1rem;
-  font-weight: bold;
-  min-height: 1.5em; /* reserve space even when empty */
+  font-size: 1.2rem;
   color: #333;
+  min-height: 1.2em;  /* reserve space */
+  margin-bottom: .5rem;
 }
+
+/* Country facts */
 #country-facts {
-  margin-top: 1rem;
   text-align: left;
   font-size: 0.9rem;
   color: #444;
@@ -95,4 +110,13 @@ body {
   width: 40px;
   vertical-align: middle;
   margin-right: 0.5rem;
+}
+
+/* Footer */
+footer {
+  padding: 1rem;
+  text-align: center;
+  background: rgba(255,255,255,0.6);
+  font-size: 0.9rem;
+  color: #555;
 }
