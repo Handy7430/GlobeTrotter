@@ -1,53 +1,87 @@
-/* General styles */
+/* Reset and base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  height: 100%;
+}
+
+/* Center the container vertically & horizontally */
 body {
-  font-family: Arial, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: #f0f0f0;
-  margin: 0;
+  background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Game container */
-#game-container {
-  text-align: center;
-  padding: 20px;
-  background-color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+/* Game card */
+.container {
+  background: #fff;
   width: 90%;
   max-width: 400px;
+  padding: 2rem 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+  text-align: center;
 }
 
-/* Input field styles */
-input[type="text"] {
-  padding: 10px;
-  width: 80%;
-  font-size: 16px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+/* Title */
+.container h1 {
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+  color: #333;
 }
 
-/* Button styles */
-button {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-button:hover {
-  background-color: #45a049;
-}
-
-/* Image container styles */
+/* Country image */
 #country-image {
-  max-width: 100%;
-  height: auto;
-  margin-bottom: 20px;
+  width: 100%;
+  max-height: 220px;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 2px solid #eee;
+  margin-bottom: 1rem;
+}
+
+/* Input field */
+#user-input {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+/* Button row */
+.buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Buttons */
+.buttons button {
+  flex: 1;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #3b82f6;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.buttons button:hover {
+  background-color: #2563eb;
+}
+
+/* Feedback text */
+#feedback {
+  font-size: 1.1rem;
+  font-weight: bold;
+  min-height: 1.5em; /* reserve space even when empty */
+  color: #333;
 }
