@@ -85,3 +85,14 @@ body {
   min-height: 1.5em; /* reserve space even when empty */
   color: #333;
 }
+#country-facts {
+  margin-top: 1rem;
+  text-align: left;
+  font-size: 0.9rem;
+  color: #444;
+}
+#country-facts img {
+  width: 40px;
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
